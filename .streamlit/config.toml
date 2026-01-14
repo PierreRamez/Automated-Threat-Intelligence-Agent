@@ -1,0 +1,10 @@
+[theme]
+primaryColor = "#CF0000"
+backgroundColor = "#0E1117"  # Change this to your desired background color
+secondaryBackgroundColor = "#CF0000"
+textColor = "#FFFFFF"
+font = "monospace"
+
+# For 2026 versions of Streamlit, you can also set base font size here
+baseFontSize = 18
+
