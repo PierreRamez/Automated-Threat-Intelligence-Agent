@@ -2,7 +2,7 @@
 
 A lightweight Python agent that polls NVD, filters OT/ICS-relevant CVEs, asks Gemini for OT classification *and* operational reasoning in a single pass, and exposes findings via a Streamlit SOC-style dashboard.
 
-**Live demo:** [https://automated-threat-intelligence-agent.streamlit.app/](https://automated-threat-intelligence-agent.streamlit.app/)
+**Interactive Dashboard** [https://automated-threat-intelligence-agent.streamlit.app/](https://automated-threat-intelligence-agent.streamlit.app/)
 
 ---
 
