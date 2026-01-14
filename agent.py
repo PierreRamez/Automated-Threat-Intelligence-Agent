@@ -58,7 +58,7 @@ def analyze_with_gemini(description):
     
     prompt=f"""
     You are an expert OT threat analyst with 160 IQ.
-    Throughly analyze the following CVE description.
+    Thoroughly analyze the following CVE description.
     Return ONLY a JSON object with exactly these keys:
     1. "ot_related" : boolean (True if OT/ICS/SCADA related, False otherwise).
     2. "reason" : string (an expert-level, detailed explanation of why. If "ot_related" is True, explain why this vulnerability is dangerous).
