@@ -185,11 +185,11 @@ flowchart LR
 
 ---
 
-## Interview-Ready Talking Points
+## Design Philosophy
 
-- Focus on **operational relevance**, not just CVSS scores.
-- Intentional simplicity: fewer moving parts, fewer failure modes.
-- Clear upgrade path to two-stage prompting, configurable runtime, and persistent storage.
+- **Operational Impact over CVSS:** The system prioritizes *context* (OT relevance) over raw scores, acknowledging that a "Medium" severity CVE can still shut down a factory.
+- **Intentional Simplicity:** By avoiding complex databases or microservices for this prototype, the system reduces failure modes and ensures reliability during the evaluation.
+- **Future Roadmap:** The architecture allows for a clear upgrade path to two-stage prompting, external configuration, and SQLite storage without rewriting the core logic.
 
 ---
 
