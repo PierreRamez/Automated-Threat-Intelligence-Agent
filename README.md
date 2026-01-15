@@ -1,5 +1,5 @@
 # Automated OT Threat Intelligence Agent
-![OT Security Pipeline](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/security_pipeline.yml/badge.svg)
+![OT Security Pipeline](https://github.com/PierreRamez/Automated-Threat-Intelligence-Agent/actions/workflows/security_pipeline.yml/badge.svg)
 
 A lightweight Python agent that polls NVD, filters OT/ICS-relevant CVEs, asks Gemini for OT classification *and* operational reasoning in a single pass, and exposes findings via a Streamlit SOC-style dashboard.
 
