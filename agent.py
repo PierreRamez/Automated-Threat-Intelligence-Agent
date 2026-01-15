@@ -141,7 +141,7 @@ while True:
               
               # output the OT threat found to a JSON file
               try:
-                with open('/home/pierreramez/Hard Drive/Projects/ControlPoint Task/output_sample.json',mode='r') as f: #used mode=a to append to existing file and not overwrite existing data
+                with open('output_sample.json',mode='r') as f: #used mode=a to append to existing file and not overwrite existing data
                   data = json.load(f)
                   
                   # checking and correcting the data type
@@ -156,7 +156,7 @@ while True:
               data.append(new_entry)
 
               if data:
-                with open('/home/pierreramez/Hard Drive/Projects/ControlPoint Task/output_sample.json',mode='w') as f:
+                with open('output_sample.json',mode='w') as f:
                   json.dump(data,f,indent=4)
         else:
           continue
