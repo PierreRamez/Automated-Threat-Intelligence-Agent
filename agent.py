@@ -1,4 +1,3 @@
-import subprocess
 import sys
 from nvdlib import searchCVE
 import streamlit as st
@@ -162,6 +161,7 @@ if __name__== "__main__":
           else:
             continue
 
-        except:
+        except Exception as e:
+          print(f"Skipping CVE due to error: f{e}")
           continue
     time.sleep(600)
