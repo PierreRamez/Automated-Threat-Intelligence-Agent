@@ -135,8 +135,9 @@ if __name__== "__main__":
                 #initialized this to save every new approved CVE
                 approved_cves[cve.id] = {'cvss':cvss,
                                         'severity':severity,
-                                        'description':f"{description}",
-                                        'ai_insight':f'{response['reason']}'}
+                                        'description': description,
+                                        'ai_insight': response['reason']
+                                        }
                 new_entry = {'cve_id':f'{cve.id}'}|approved_cves[cve.id] #concatenating the dict to output a separate new output to pass to the dashboard
                 
                 # output the OT threat found to a JSON file
