@@ -88,7 +88,7 @@ The agent uses a **single-shot prompt** via **Gemini 2.5 Flash Lite** to maximiz
 ```text
 You are an expert OT threat analyst with 160 IQ.
 Thoroughly analyze the following CVE description.
-ONLY a JSON object with exactly these keys:
+Return ONLY a JSON object with exactly these keys:
     1. "ot_related" : boolean (True if OT/ICS/SCADA related, False otherwise).
     2. "reason" : string (an expert-level, detailed explanation of why. If "ot_related" is True, explain why this vulnerability is dangerous).
 
