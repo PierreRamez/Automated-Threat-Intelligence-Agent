@@ -81,7 +81,7 @@ streamlit run st_dashboard.py
 
 ## Prompt Design & Decision Logic
 
-The agent uses a **single-shot prompt** via **Gemini 2.0 Flash Lite** to maximize efficiency and simplicity. In one call, the model is asked to both classify the CVE and, if applicable, explain the risk to industrial systems.
+The agent uses a **single-shot prompt** via **Gemini 2.5 Flash Lite** to maximize efficiency and simplicity. In one call, the model is asked to both classify the CVE and, if applicable, explain the risk to industrial systems.
 
 ### Combined Prompt Structure
 
