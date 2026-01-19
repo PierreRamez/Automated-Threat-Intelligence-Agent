@@ -14,10 +14,10 @@ def get_base64_of_bin_file(bin_file):
         data = f.read()
     return base64.b64encode(data).decode()
 
-# 1. Prepare your image and target URL
+# 1. Prepare image and target URL
 logo_path = 'logo-header-dark.png'
 logo_base64 = get_base64_of_bin_file(logo_path)
-target_url = "https://control-point.io/" # Change this to your desired link
+target_url = "https://control-point.io/" 
 
 # 2. Display centered, clickable logo
 st.markdown(

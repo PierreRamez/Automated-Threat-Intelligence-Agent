@@ -98,39 +98,46 @@ if __name__== "__main__":
   approved_cves=dict()
   dashboard_data=dict()
   NVD_API = os.environ.get('NVD_API_KEY')
+
   while True:
-    end = datetime.datetime.now()
-    start = end - datetime.timedelta(days=1)
+
+    if not seen_cves: # check if it is the first time to fetch CVEs (if the set of seen_cves is empty)
+      end = datetime.datetime.now()
+      start = end - datetime.timedelta(days=1) # fetch from the past 24 hrs then inside the loop fetch every 20 mins
+    else:  
+      end = datetime.datetime.now()
+      start = end - datetime.timedelta(minutes=20) # fetch every 20 mins only if the seen_cves set is not empty
+
     r = searchCVE(pubStartDate=start, pubEndDate=end, key=NVD_API)
     print(f"Fetched {len(r)} records.")
 
-    for cve in r[:5]: # Print first 5 to check
+    for cve in r[:5]: # Print first 5 to check them
         print(f"{cve.id}: {cve.descriptions[0].value}")
     for cve in r:
       if cve.id not in seen_cves and cve.vulnStatus != "Rejected": #check if this is a new cve and wasn't rejected as a vulnerability
         seen_cves.add(cve.id) #to avoid reprocessing the same cve
 
-        try:
+        try: # a CVE might not have a description. used to avoid errors.
           description = cve.descriptions[0].value #to get the description
-          if is_potential_ot(description):  # check if the CVE can be OT related
+          if is_potential_ot(description):  # check if the CVE can be OT related using the keywords
               print(f"New potential threat is detected: {cve.id}")
               print(f"sending {cve.id} description to LLM for analysis...")
               response = analyze_with_gemini(description)
-              time.sleep(5) # making sure to wait 20 seconds between each check to prevent hitting the API limit
+              time.sleep(5) # making sure to wait 5 seconds between each check to prevent hitting the API limit (12 RPM)
               
               if response['ot_related'] == True: # check if the response is OT related to keep/ignore it
                 print(f"""
-                ###################################
+                #######################################
                 APPROVED: {cve.id} is an OT threat!
-                ###################################
+                #######################################
                 """)
 
                 try:
                   cvss = cve.metrics.cvssMetricV31[0].cvssData.baseScore #new CVEs might not have a severity score. Implemented a safety check
                   severity = cve.metrics.cvssMetricV31[0].cvssData.baseSeverity
                 except:
-                  cvss = 'N/A' # if no severity score. set the severity value to 'N/A'
-                  severity = 'N/A'
+                  cvss = None # if no severity score. set the severity value to 'N/A'
+                  severity = 'N/A' 
                 #initialized this to save every new approved CVE
                 approved_cves[cve.id] = {'cvss':cvss,
                                         'severity':severity,
@@ -141,7 +148,7 @@ if __name__== "__main__":
                 
                 # output the OT threat found to a JSON file
                 try:
-                  with open('output_sample.json',mode='r') as f: #used mode=a to append to existing file and not overwrite existing data
+                  with open('output_sample.json',mode='r') as f: #used mode='r' to read the existing file and checking the data type
                     data = json.load(f)
                     
                     # checking and correcting the data type
@@ -164,4 +171,4 @@ if __name__== "__main__":
         except Exception as e:
           print(f"Skipping CVE due to error: f{e}")
           continue
-    time.sleep(600)
+    time.sleep(600) # to check every 10 minutes
