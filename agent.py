@@ -161,10 +161,10 @@ if __name__== "__main__":
                   data = []
                 
                 data.append(new_entry)
-
-                if data:
-                  with open('output_sample.json',mode='w') as f:
-                    json.dump(data,f,indent=4)
+                
+                # write to the output_sample.json file
+                with open('output_sample.json',mode='w') as f:
+                  json.dump(data,f,indent=4)
           else:
             continue
 
